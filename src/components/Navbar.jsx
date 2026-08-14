@@ -19,7 +19,7 @@ const Navbar = () => {
           <nav className="flex items-center flex-x-6">
             <Link to={'/cart'}
               className="relative p-3 bg-orange-500/10 rounded-xl hover:bg-orange-500/20 
-            transition: duration-200 border border-orange-400/50 shadow-lg cursor-pointer">
+            transition duration-200 border border-orange-400/50 shadow-lg cursor-pointer">
               <PiShoppingCartLight className="w-6 h-6 text-orange-400" />
             </Link>
           </nav>
