@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
     <>
-      <header className='sticky top-0 bg-gray-950/95 backdrop-blur-md text-white shadow-2xl 
+      <header className='z-50 sticky top-0 bg-gray-950/95 backdrop-blur-md text-white shadow-2xl 
     shadow-gray-950/70 border-b border-orange-900'>
         <div className='container mx-auto px-4 py-4 flex justify-between items-center'>
           <Link to={'/'}>
