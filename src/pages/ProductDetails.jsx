@@ -9,7 +9,7 @@ import { LuShoppingBasket } from "react-icons/lu";
 
 const ProductDetails = () => {
   const { id } = useParams()
-  const { products } = useCart()
+  const { products,addToCart } = useCart()
   const prodSpec = products.find(product => String(product.id) === id)
 
   if (!prodSpec) {
@@ -62,9 +62,11 @@ const ProductDetails = () => {
           </ul>
         
         <div className='mt-5 space-y-4 flex justify-center flex-col'>
-          <button className='w-full py-3 bg-orange-600 text-white
-                    font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300
-                    flex items-center justify-center space-x-2 transform hover:ring-4 hover:ring-orange-600/50 uppercase
+          <button 
+          onClick={() => addToCart(prodSpec)}
+          className='w-full py-3 bg-orange-600 text-white
+          font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300
+              flex items-center justify-center space-x-2 transform hover:ring-4 hover:ring-orange-600/50 uppercase
                     tracking-wider'>
             <LuShoppingBasket className='w-5 h-5' />
             <span>Add to cart</span>

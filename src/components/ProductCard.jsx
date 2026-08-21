@@ -1,8 +1,10 @@
 
 import { Link } from 'react-router-dom'
 import { LuShoppingBasket } from "react-icons/lu";
+import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
+  const {addToCart} = useCart()
   return (
     <>
       <div className='bg-gray-900 rounded-2xl shadow-xl overflow-hidden flex flex-col h-full transition
@@ -30,7 +32,9 @@ const ProductCard = ({ product }) => {
             <span className='px-3 py-1 bg-gray-800 border-gray-700 rounded-full
           font-semibold'>{product.category}</span>
           </div>
-          <button className='mx-auto w-full py-3 bg-orange-600 text-white
+          <button 
+          onClick={() => addToCart(product)}
+          className='mx-auto w-full py-3 bg-orange-600 text-white
           font-bold rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300
           flex items-center justify-center space-x-2 transform hover:ring-4 hover:ring-orange-600/50 uppercase
           tracking-wider'>
