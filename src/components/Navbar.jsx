@@ -2,8 +2,10 @@ import { IoStorefrontOutline } from "react-icons/io5";
 import { PiShoppingCartLight } from "react-icons/pi";
 
 import { Link } from 'react-router-dom'
+import { useCart } from "../context/CartContext";
 
 const Navbar = () => {
+  const {cartCount} = useCart()
   return (
     <>
       <header className='z-50 sticky top-0 bg-gray-950/95 backdrop-blur-md text-white shadow-2xl 
@@ -21,6 +23,9 @@ const Navbar = () => {
               className="relative p-3 bg-orange-500/10 rounded-xl hover:bg-orange-500/20 
             transition duration-200 border border-orange-400/50 shadow-lg cursor-pointer">
               <PiShoppingCartLight className="w-6 h-6 text-orange-400" />
+              {cartCount > 0 && <span className="absolute top-0 right-0 inline-flex 
+              items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white
+              transform translate-x-1/2 -translate-y-1/2 bg-red-600 rounded-full min-w-6 h-5">{cartCount}</span>}
             </Link>
           </nav>
         </div>

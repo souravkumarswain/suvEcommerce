@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useMemo, useState } from "react";
 import { initialProducts } from "../data/product";
 
 const CartContext = createContext();
@@ -22,26 +22,33 @@ export const CartProvider = ({ children }) => {
     }
 
     //remove product from cart
-    const removeFromCart = (productId,removeAll = false) => {
+    const removeFromCart = (productId, removeAll = false) => {
         setCart((prvsCart) => {
-        const existingItem = prvsCart.find(item => item.id === productId)
-        if(!existingItem) return prvsCart
-        if(removeAll || existingItem.quantity == 1){
-            return prvsCart.filter(item => item.id != productId)
+            const existingItem = prvsCart.find(item => item.id === productId)
+            if (!existingItem) return prvsCart
+            if (removeAll || existingItem.quantity == 1) {
+                return prvsCart.filter(item => item.id != productId)
+            }
+            else {
+                return prvsCart.map(item => item.id === productId
+                    ? { ...item, quantity: item.quantity - 1 }
+                    : item
+                )
+            }
         }
-        else{
-            return prvsCart.map(item => item.id === productId 
-                ? {...item, quantity: item.quantity - 1}
-                :item
-            )
-        }
-        }    
-    )
+        )
     }
-    console.log(cart);
+    //clear whole cart at once
+    const clearCart = () => setCart([]);
+    //item count of cart
+    const cartCount = useMemo(() => cart.reduce((total, item) => total + item.quantity, 0), [cart]);
+    //total price count of cart
+    const cartTotal = useMemo(() => cart.reduce((total, item) => total + item.quantity * item.price, 0), [cart])
+    
     return (
-
-        <CartContext value={{ products,cart,addToCart }}>{children}</CartContext>
+        <CartContext value={{ products, cart, addToCart, removeFromCart, clearCart, cartCount, cartTotal }}>
+            {children}
+        </CartContext>
     )
 }
 
