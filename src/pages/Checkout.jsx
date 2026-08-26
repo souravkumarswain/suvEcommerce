@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { useCart } from "../context/CartContext"
 import { FiMapPin } from "react-icons/fi";
+import { FiPackage } from "react-icons/fi";
 import OrderConfirmation from "./OrderConfirmation";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
-  const {cartTotal,clearCart} = useCart()
+  const {cartTotal,clearCart,cart} = useCart()
   const [deliveryDetails, setDeliveryDetails] = useState({
     name:"",
     address:"",
@@ -67,6 +69,36 @@ const Checkout = () => {
                 </div>
               </form>
             </div>
+            <div className="lg:col-span-1 p-8 bg-gray-900 rounded-2xl shadow-2xl
+          border-1-4 sticky top-20 h-fit border border-gray-800">
+            <h3 className="text-3xl font-bold text-white mb-5 border-b border-y-gray-700 pb-3 
+              flex items-center space-x-2">
+                <FiPackage className="w-6 h-6 text-orange-400"/>
+                <span>Summary</span>
+            </h3>
+            <div className="space-y-4 text-gray-400">
+                {cart.map(item =><div key={item.id}
+                className="flex justify-between text-base border-b border-gray-800 pb-2">
+                  <span className="truncate text-gray-300">{item.name}</span>
+                  <span className="font-medium text-orange-300">{(item.price * item.quantity).toFixed(2)}</span>
+                </div> )}
+            
+            <div className="space-y-4 text-gray-400 ">
+              <div className="flex justify-between text-xl ">
+                <span>Subtotal :</span>
+                <span className="font-semibold text-white">₹ {cartTotal.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between text-xl ">
+                <span>Shipping (Express):</span>
+                <span className="font-semibold text-green-400 italic">Free</span>
+              </div>
+              <div className="flex justify-between pt-6 border-t border-gray-700">
+                <span className="text-2xl font-extrabold text-white">Total Due:</span>
+                <span className=" text-3xl font-extrabold text-orange-400">₹{cartTotal.toFixed(2)}</span>
+              </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
