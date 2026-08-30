@@ -1,6 +1,7 @@
 import { AiOutlineSearch } from "react-icons/ai";
 
-const SearchFilter = () => {
+const SearchFilter = ({searchedItem,setSearchedItem}) => {
+
   return (
     <>
     <div className="mb-5 p-5 bg-gray-900 rounded-2xl shadow-xl border border-y-gray-800">
@@ -9,7 +10,10 @@ const SearchFilter = () => {
         <AiOutlineSearch className="w-5 h-5 text-gray-500 ml-4"/>
         <input type="text" placeholder = "Search high-performance product by name or feature..."
         className="w-full p-4 outline-none text-white bg-gray-800 placeholder-gray-500 
-        text-base font-medium"/>
+        text-base font-medium"
+        value = {searchedItem}
+        onChange={(e) => setSearchedItem(e.target.value)}
+        />
       </div>
     </div>
     </>
