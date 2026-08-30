@@ -1,5 +1,6 @@
 import { createContext, useContext, useMemo, useState } from "react";
 import { initialProducts } from "../data/product";
+import { toast, Flip } from 'react-toastify';
 
 const CartContext = createContext();
 
@@ -9,6 +10,17 @@ export const CartProvider = ({ children }) => {
 
     //add products to cart
     const addToCart = (product) => {
+        toast.success('Item is added to cart!', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Flip,
+        });
         setCart((prvsCart) => {
             const existingItem = prvsCart.find(item => item.id === product.id)
             if (existingItem) {
@@ -44,7 +56,7 @@ export const CartProvider = ({ children }) => {
     const cartCount = useMemo(() => cart.reduce((total, item) => total + item.quantity, 0), [cart]);
     //total price count of cart
     const cartTotal = useMemo(() => cart.reduce((total, item) => total + item.quantity * item.price, 0), [cart])
-    
+
     return (
         <CartContext value={{ products, cart, addToCart, removeFromCart, clearCart, cartCount, cartTotal }}>
             {children}

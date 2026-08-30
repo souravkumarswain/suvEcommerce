@@ -6,10 +6,24 @@ import Error from "./pages/Error"
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import ProductDetails from './pages/ProductDetails'
+import { ToastContainer, Flip } from 'react-toastify';
 
 
 const DeliveryAppLayout = () => {
   return <div className="min-h-screen bg-gray-950 font-sans text-white">
+    <ToastContainer
+      position="top-right"
+      autoClose={1500}
+      hideProgressBar={false}
+      newestOnTop={false}
+      closeOnClick={false}
+      rtl={false}
+      pauseOnFocusLoss
+      draggable
+      pauseOnHover
+      theme="dark"
+      transition={Flip}
+    />
     <Navbar />
     <Outlet />
     <Footer />
