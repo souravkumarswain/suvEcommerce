@@ -35,6 +35,17 @@ export const CartProvider = ({ children }) => {
 
     //remove product from cart
     const removeFromCart = (productId, removeAll = false) => {
+        toast.success('Item is removed from cart!', {
+            position: "top-right",
+            autoClose: 1500,
+            hideProgressBar: false,
+            closeOnClick: false,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Flip,
+        });
         setCart((prvsCart) => {
             const existingItem = prvsCart.find(item => item.id === productId)
             if (!existingItem) return prvsCart
