@@ -4,9 +4,14 @@ import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import CartItem from "../components/CartItem";
 import { GiEmptyMetalBucketHandle } from "react-icons/gi";
+import Checkout from "./Checkout";
+import { useState } from "react";
 
 const Cart = () => {
   const { cartCount, cart, cartTotal } = useCart()
+  const [goToCheckout, setGoToCheckout] = useState(false)
+
+  if(goToCheckout) return <Checkout/>
   return (
     <>
       <div className="container mx-auto px-4 md:px-8 pt-8 ">
@@ -67,8 +72,8 @@ const Cart = () => {
                   <span>PROCEED SECURELY</span>
                 </button>
               ) : (
-                <Link
-                  to={'/checkout'}
+                <button
+                  onClick={() => setGoToCheckout(true)}
                   className="w-full mt-8 py-4 bg-orange-600 text-white
                     font-extrabold text-xl rounded-full shadow-lg shadow-orange-800/50
                     cursor-pointer hover:bg-orange-700 transition duration-300
@@ -77,7 +82,7 @@ const Cart = () => {
                 >
                   <FiZap className='w-5 h-5' />
                   <span>PROCEED SECURELY</span>
-                </Link>
+                </button>
               )}
               <p className="text-xs text-gray-500 text-center mt-4">All transaction are encripted and secure</p>
             </div>

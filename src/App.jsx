@@ -4,7 +4,6 @@ import ProductList from "./pages/ProductList"
 import Footer from './components/Footer'
 import Error from "./pages/Error"
 import Cart from './pages/Cart'
-import Checkout from './pages/Checkout'
 import ProductDetails from './pages/ProductDetails'
 import { ToastContainer, Flip } from 'react-toastify';
 
@@ -47,10 +46,6 @@ const application = createBrowserRouter([
         path: '/cart',
         element: <Cart />
       },
-      {
-        path: '/checkout',
-        element: <Checkout />
-      }
     ],
     errorElement: <Error />
   }
