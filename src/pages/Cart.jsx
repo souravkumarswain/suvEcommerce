@@ -3,7 +3,7 @@ import { FiZap } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import CartItem from "../components/CartItem";
-import { LuShoppingBasket } from "react-icons/lu";
+import { GiEmptyMetalBucketHandle } from "react-icons/gi";
 
 const Cart = () => {
   const { cartCount, cart, cartTotal } = useCart()
@@ -21,10 +21,17 @@ const Cart = () => {
         <h2 className="text-4xl font-extrabold text-white mb-10 tracking-tight">Shopping Cart ({cartCount})</h2>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
+          {cartCount > 0 ? 
           <div className="lg:col-span-2 space-y-4">
             {cart.map(item => <CartItem key={item.id} item={item} />)}
-          </div>
-
+          </div> : 
+          <div className="lg:col-span-2 items-center flex flex-col justify-center space-y-6">
+            <GiEmptyMetalBucketHandle className="h-40 w-40 text-white"/>
+            <h2 className="text-orange-400 font-bold text-2xl">
+                Your bag is too light! Add some Item.
+            </h2>
+          </div>}
+          
           <div className="lg:col-span-1 p-8 bg-gray-900 rounded-2xl shadow-2xl
           border-1-4 sticky top-20 h-fit border border-gray-800">
             <h3 className="text-3xl font-bold text-white mb-5 border-b border-y-gray-700 pb-3 
@@ -47,15 +54,31 @@ const Cart = () => {
                 <span className="text-2xl font-extrabold text-white">Estimated Total:</span>
                 <span className=" text-2xl font-extrabold text-orange-400">₹{cartTotal.toFixed(2)}</span>
               </div>
-              <Link
-              to={'/checkout'}
-                className='w-full mt-8 py-4 bg-orange-600 text-white
-                          font-extrabold text-xl rounded-full shadow-lg shadow-orange-800/50 cursor-pointer hover:bg-orange-700 transition duration-300
-                          flex items-center justify-center space-x-2 transform hover:ring-4 hover:ring-orange-600/50 uppercase
-                          tracking-wider'>
-                <FiZap className='w-5 h-5' />
-                <span>PROCEED SECURELY</span>
-              </Link>
+              {cartCount === 0 ? (
+                <button
+                  disabled
+                  className="w-full mt-8 py-4 bg-orange-600/50 text-white
+                    font-extrabold text-xl rounded-full shadow-lg shadow-orange-800/30
+                    flex items-center justify-center space-x-2 uppercase tracking-wider
+                    cursor-not-allowed opacity-50"
+                  aria-disabled="true"
+                >
+                  <FiZap className='w-5 h-5' />
+                  <span>PROCEED SECURELY</span>
+                </button>
+              ) : (
+                <Link
+                  to={'/checkout'}
+                  className="w-full mt-8 py-4 bg-orange-600 text-white
+                    font-extrabold text-xl rounded-full shadow-lg shadow-orange-800/50
+                    cursor-pointer hover:bg-orange-700 transition duration-300
+                    flex items-center justify-center space-x-2 transform hover:ring-4 hover:ring-orange-600/50 uppercase
+                    tracking-wider"
+                >
+                  <FiZap className='w-5 h-5' />
+                  <span>PROCEED SECURELY</span>
+                </Link>
+              )}
               <p className="text-xs text-gray-500 text-center mt-4">All transaction are encripted and secure</p>
             </div>
           </div>

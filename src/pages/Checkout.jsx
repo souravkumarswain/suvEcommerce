@@ -3,7 +3,6 @@ import { useCart } from "../context/CartContext"
 import { FiMapPin } from "react-icons/fi";
 import { FiPackage } from "react-icons/fi";
 import OrderConfirmation from "./OrderConfirmation";
-import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const {cartTotal,clearCart,cart} = useCart()

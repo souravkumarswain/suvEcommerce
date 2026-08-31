@@ -1,6 +1,5 @@
 import { FaRegCheckCircle } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { FiZap } from "react-icons/fi";
 
 const OrderConfirmation = ({deliveryDetails}) => {
   return (
